@@ -1,0 +1,20 @@
+
+{
+  "name": "grand-filo-fatura-v3",
+  "version": "3.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "backup": "node backup.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "sqlite3": "^5.1.6",
+    "sqlite": "^4.1.2",
+    "csv-writer": "^1.6.0",
+    "open": "^8.4.0"
+  }
+}
