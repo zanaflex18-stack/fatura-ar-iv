@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Grand® Filo Car - Fatura </title>
+<style>
+  :root{--accent:#ff6600;--muted:#6b7280;--line:#cfcfcf}
+  body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fa;padding:28px;margin:0}
+  .paper{max-width:900px;margin:0 auto;background:white;padding:28px;border-radius:8px;border:1px solid #e6e9ee;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+  .top-center{text-align:center;margin-bottom:14px}
+  .top-center img{max-height:90px;object-fit:contain;display:block;margin:0 auto}
+  .efatura-title{font-weight:700;color:#374151;font-size:1.05rem;margin-top:6px}
+  .header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+  .brand h1{color:var(--accent);margin:0;font-size:1.4rem}
+  .company-meta{color:var(--muted);font-size:0.9rem;margin-top:6px;line-height:1.3}
+  .avis-logo{height:64px;object-fit:contain}
+  hr{border:none;border-top:1px solid #eef2f6;margin:14px 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .section{padding:6px}
+  .label{font-weight:700;color:#374151;margin-bottom:6px;display:block}
+  input[type="text"], input[type="number"], input[type="datetime-local"], textarea, select{width:100%;padding:8px;border-radius:6px;border:1px solid #e6e9ee;font-size:0.95rem;background:#fff}
+  textarea{resize:vertical}
+  table{width:100%;border-collapse:collapse;margin-top:6px}
+  th,td{padding:8px;border-bottom:1px solid #f0f2f5;text-align:left}
+  .right{text-align:right}
+  .muted{color:var(--muted);font-size:0.9rem}
+  .totals{margin-top:10px;padding:12px;border:1px solid #f0f2f5;background:#fafafa;border-radius:6px}
+  .authority{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:12px}
+  .auth-left{flex:1}
+  .auth-right{width:260px;text-align:right}
+  .imza{max-width:200px;display:block;margin-left:auto}
+  .center{text-align:center}
+  button{display:inline-block;margin-top:18px;background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:700}
+  @media print{button{display:none}body{background:white;padding:0}.paper{box-shadow:none;border:none;margin:0;border-radius:0}}
+</style>
+</head>
+<body>
+  <div class="paper">
+
+    <!-- Top logo and E-Fatura title -->
+    <div class="top-center">
+      <img src="logo2.jpg" alt="Üst Logo" onerror="this.style.display='none'">
+      <div class="efatura-title">T.C. GELİR İDARESİ BAŞKANLIĞI – E‑FATURA</div>
+    </div>
+
+    <!-- Header: Grand Filo + AVIS logo -->
+    <div class="header">
+      <div class="brand">
+        <h1>Grand® Filo Car</h1>
+        <div class="company-meta">
+          <strong>AVİS</strong><br>
+          TİCARET SİCİL NO: 8601-5 &nbsp; MERSİS: 064901039102508<br>
+          VERGİ NO: 9811398990<br>
+          Adres: Şişli/İstanbul 54684 Cadde 45 Sokak Nazili İş Merkezi Altı 54 B4<br>
+          Telefon: 0 554 570 47 43
+        </div>
+      </div>
+      <div><img src="avis.jpg" alt="AVIS Logo" class="avis-logo" onerror="this.style.display='none'"></div>
+    </div>
+
+    <hr>
+
+    <!-- Reservation and date -->
+    <div class="grid">
+      <div class="section">
+        <div class="label">Rezervasyon Numarası</div>
+        <input type="text" id="rezNo" placeholder="(ör: #TR668239AV)">
+      </div>
+      <div class="section">
+        <div class="label">Fatura Tarihi</div>
+        <input type="datetime-local" id="faturaTarih">
+      </div>
+    </div>
+
+    <div style="height:8px"></div>
+
+    <!-- Customer and delivery -->
+    <div class="grid">
+      <div class="section">
+        <div class="label">Müşteri Adı</div>
+        <input type="text" id="musteri" placeholder="(ör: Ali Veli veya Firma Ünvanı)">
+        <div style="height:8px"></div>
+        <div class="label">Teslimat Adresi</div>
+        <textarea id="adres" rows="2" placeholder="(adres... )"></textarea>
+      </div>
+      <div class="section">
+        <div class="label">Kiralama Tarihleri</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <input type="datetime-local" id="basTarih">
+          <input type="datetime-local" id="bitTarih">
+        </div>
+        <div style="height:8px"></div>
+        <div class="label">Kiralanan Gün Sayısı</div>
+        <input type="number" id="gunSayisi" readonly placeholder="(otomatik)">
+      </div>
+    </div>
+
+    <div style="height:8px"></div>
+
+    <!-- Vehicle and pricing -->
+    <div class="grid">
+      <div class="section">
+        <div class="label">Araç Bilgisi</div>
+        <input type="text" id="arac" placeholder="(ör: FİAT EGEA - SEDAN - MANUEL)">
+        <div style="height:8px"></div>
+        <div class="label">Depozito (₺)</div>
+        <input type="number" id="depozito" step="0.01" placeholder="0.00">
+      </div>
+      <div class="section">
+        <div class="label">KDV Oranı (%)</div>
+        <input type="number" id="kdvOran" value="20" step="0.01">
+        <div style="height:8px"></div>
+        <div class="label">Kiralama Ücreti (Net) (₺)</div>
+        <input type="number" id="ucret" step="0.01" placeholder="0.00">
+        <div style="height:8px"></div>
+        <div class="label">Ödeme Yöntemi</div>
+        <select id="odeme">
+          <option value="">(Seçiniz)</option>
+          <option>HAVALE/EFT</option>
+          <option>KREDİ KARTI</option>
+          <option>NAKİT</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="height:8px"></div>
+
+    <!-- Pricing table and totals -->
+    <div class="section">
+      <table>
+        <thead>
+          <tr><th>Açıklama</th><th class="right">Tutar (₺)</th></tr>
+        </thead>
+        <tbody id="rows">
+          <tr><td id="desc_arac">Araç Bilgisi</td><td class="right" id="rowAmount">0.00 ₺</td></tr>
+          <tr><td>Depozito</td><td class="right" id="rowDepo">0.00 ₺</td></tr>
+          <tr><td>KDV (<span id="kdvLabel">20</span>%)</td><td class="right" id="rowKdv">0.00 ₺</td></tr>
+        </tbody>
+      </table>
+      <div class="totals right">Toplam: <strong id="toplam">0.00 ₺</strong></div>
+    </div>
+
+    <div style="height:10px"></div>
+
+    <!-- Authority and signature -->
+    <div class="authority">
+      <div class="auth-left">
+        <div style="font-weight:700">Yetkili: Ali Yılmaz — Grand® Filo Car</div>
+        <div class="muted">Satış & Filo Yönetimi</div>
+      </div>
+      <div class="auth-right">
+        <img src="imza.png" alt="İmza" class="imza" onerror="this.style.display='none'">
+        <div class="muted" style="margin-top:8px">Kaşe: Grand® Filo Car</div>
+      </div>
+    </div>
+
+    <div style="height:12px"></div>
+    <div class="center muted">Bu belge resmi e‑fatura olarak düzenlenmiştir.</div>
+
+    <div class="center">
+      <button onclick="hesapla(); yazdir()">🖨️ Yazdır / PDF Kaydet</button>
+    </div>
+
+  </div>
+
+<script>
+// set default fatura tarih to now
+(function(){ const now = new Date(); const tzoffset = now.getTimezoneOffset()*60000; const localISOTime = (new Date(now - tzoffset)).toISOString().slice(0,16); document.getElementById('faturaTarih').value = localISOTime; })();
+
+function toFixed2(v){ return (+v).toFixed(2); }
+
+function hesapla(){
+  const ucret = parseFloat(document.getElementById('ucret').value) || 0;
+  const depo = parseFloat(document.getElementById('depozito').value) || 0;
+  const kdvOran = parseFloat(document.getElementById('kdvOran').value) || 0;
+  const kdv = +(ucret * kdvOran / 100).toFixed(2);
+  document.getElementById('rowAmount').innerText = toFixed2(ucret) + ' ₺';
+  document.getElementById('rowDepo').innerText = toFixed2(depo) + ' ₺';
+  document.getElementById('kdvLabel').innerText = toFixed2(kdvOran);
+  document.getElementById('rowKdv').innerText = toFixed2(kdv) + ' ₺';
+  const toplam = +(ucret + depo + kdv).toFixed(2);
+  document.getElementById('toplam').innerText = toFixed2(toplam) + ' ₺';
+  // update description with vehicle info
+  document.getElementById('desc_arac').innerText = document.getElementById('arac').value || 'Araç Bilgisi';
+}
+
+// calculate days between start and end (inclusive? here we count full days)
+function calcDays(){
+  const b = document.getElementById('basTarih').value;
+  const e = document.getElementById('bitTarih').value;
+  if(!b || !e){ document.getElementById('gunSayisi').value=''; return; }
+  const bd = new Date(b); const ed = new Date(e);
+  // count nights/days: difference in days rounded up
+  const diffMs = ed - bd;
+  const diffDays = Math.max(0, Math.ceil(diffMs / (1000*60*60*24)));
+  document.getElementById('gunSayisi').value = diffDays;
+}
+
+document.getElementById('ucret').addEventListener('input', hesapla);
+document.getElementById('depozito').addEventListener('input', hesapla);
+document.getElementById('kdvOran').addEventListener('input', hesapla);
+document.getElementById('arac').addEventListener('input', hesapla);
+document.getElementById('basTarih').addEventListener('change', function(){ calcDays(); });
+document.getElementById('bitTarih').addEventListener('change', function(){ calcDays(); });
+
+function yazdir(){ window.print(); }
+
+// leave all fields empty by default (no sample data)
+</script>
+</body>
+</html>
